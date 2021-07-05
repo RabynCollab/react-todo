@@ -1,0 +1,7 @@
+.form-control:focus {
+  border-color: none;
+  box-shadow: none;
+}
+
+h1{ font-size: 50px;
+}
