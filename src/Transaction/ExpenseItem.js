@@ -1,9 +1,11 @@
+import { useContext } from "react";
+import { DataContext } from "../context/data";
 import Update from "./Update";
 
 
-const ExpenseItem = ({ expenses, removeExpense, updateExpense }) => {
-
-  const data = expenses.map((item) => {
+const ExpenseItem = () => {
+  const ctx = useContext(DataContext);
+  const data = ctx.expense.map((item) => {
     return <div className="row align-items-center " key={item.id}>
       <div className="col-lg-8 mt-3 ">
         <div className="card border-0 bg-light">
@@ -15,7 +17,7 @@ const ExpenseItem = ({ expenses, removeExpense, updateExpense }) => {
             <p className="lead card-subtitle">PURCHASE DATE: {item.date}</p>
           </div>
           <div className="d-flex justify-content-end p-3">
-            <button className="btn btn-dark" onClick={() => removeExpense(item.id)}>Remove</button>
+            <button className="btn btn-dark" onClick={() => ctx.removeExpense(item.id)}>Remove</button>
 
             <button className="btn btn-primary ms-2" data-bs-toggle="modal" data-bs-target={`#${item.title.substring(0, 5).trim()}`} data-bs-whatever="@mdo">Update</button>
             <div className="modal fade" id={item.title.substring(0, 5).trim()} tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -26,7 +28,7 @@ const ExpenseItem = ({ expenses, removeExpense, updateExpense }) => {
                     <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div className="modal-body">
-                    <Update title={item.title} amount={item.amount} date={item.date} updateExpense={updateExpense} id={item.id} />
+                    <Update title={item.title} amount={item.amount} date={item.date} id={item.id} />
 
                   </div>
 

@@ -1,14 +1,16 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid';
+import { DataContext } from '../context/data';
 
 
-const NewExpense = ({ addExpense }) => {
+const NewExpense = () => {
   const [userInput, setInput] = useState({
     title: '',
     date: '',
     amount: '',
   });
 
+  const ctx = useContext(DataContext);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setInput((prev) => {
@@ -27,7 +29,7 @@ const NewExpense = ({ addExpense }) => {
       date: userInput.date,
       id: uuidv4()
     }
-    addExpense(expenseData);
+    ctx.onAddExpense(expenseData);
     setInput({
       title: '',
       date: '',

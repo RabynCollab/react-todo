@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
+import { DataContext } from '../context/data';
 
 
 
-const Update = ({ title, amount, date, updateExpense, id }) => {
+const Update = ({ title, amount, date, id }) => {
   const [userInput, setInput] = useState({
     title: title,
     date: date,
@@ -10,6 +11,7 @@ const Update = ({ title, amount, date, updateExpense, id }) => {
     id: id
   });
 
+  const ctx = useContext(DataContext);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -30,7 +32,7 @@ const Update = ({ title, amount, date, updateExpense, id }) => {
       date: userInput.date,
       id: userInput.id
     }
-    updateExpense(userInput.id, expenseData);
+    ctx.updateExpense(userInput.id, expenseData);
   }
   return (
     <>
